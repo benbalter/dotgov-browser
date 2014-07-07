@@ -3,13 +3,20 @@ require 'sinatra'
 require 'sinatra/reloader'
 require "addressable/uri"
 require 'uri'
+require 'rack/cache'
 
 class DotGovBrowser < Sinatra::Base
   include Mongo
 
+  CACHE_TTL = 30
+
   configure :development do
     register Sinatra::Reloader
   end
+
+  use Rack::Cache,
+    :metastore   => "file:cache/meta",
+    :entitystore => "file:cache/body"
 
   def db
     @db ||= begin
@@ -60,6 +67,10 @@ class DotGovBrowser < Sinatra::Base
     uri = Addressable::URI.new
     uri.query_values = query_vars.reject! { |k,v| k == key }
     uri.query
+  end
+
+  before do
+    cache_control :public, max_age: CACHE_TTL
   end
 
   get "/" do
