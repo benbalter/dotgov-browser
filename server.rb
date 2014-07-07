@@ -11,10 +11,6 @@ class DotGovBrowser < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  def get_connection
-
-  end
-
   def db
     @db ||= begin
       db = URI.parse(ENV['MONGOHQ_URL'])
