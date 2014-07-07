@@ -3,7 +3,6 @@ require 'sinatra'
 require 'sinatra/reloader'
 require "addressable/uri"
 require 'uri'
-require 'tidy_ffi'
 
 class DotGovBrowser < Sinatra::Base
   include Mongo
@@ -74,7 +73,7 @@ class DotGovBrowser < Sinatra::Base
   end
 
   get "/domains" do
-    TidyFFI::Tidy.new( erb :domains, :locals => { :domains => domains.find(query_vars) } ).clean.gsub("\n", "")
+    erb( :domains, :locals => { :domains => domains.find(query_vars) } ).gsub( /\n|\t/, "").gsub( /[ ]+/, " ")
   end
 
   get "/domains/:domain" do
