@@ -7,7 +7,7 @@
     <% count.each do |hash| %>
       <li>
         <% if hash[field].to_s.empty? %>
-          unknown
+          <a href="?<%= append_query field => "" %>">unknown</a>
         <% else %>
           <a href="?<%= append_query field => hash[field] %>"><%= hash[field] %></a>
         <% end %>
