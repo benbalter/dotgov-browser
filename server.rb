@@ -17,7 +17,7 @@ class DotGovBrowser < Sinatra::Base
     super
     fields.each do |field|
       domains.drop_indexes
-      domains.create_index( field.to_sym => Mongo::TEXT )
+      domains.create_index( field )
     end
   end
 
