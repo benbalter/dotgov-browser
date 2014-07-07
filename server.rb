@@ -13,6 +13,14 @@ class DotGovBrowser < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  def initialize
+    super
+    fields.each do |field|
+      domains.drop_indexes
+      domains.create_index( field.to_sym => Mongo::TEXT )
+    end
+  end
+
   def db
     @db ||= begin
       uri = ENV['MONGOHQ_URL'] || ""
