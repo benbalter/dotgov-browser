@@ -15,8 +15,9 @@ class DotGovBrowser < Sinatra::Base
     @db ||= begin
       db = URI.parse(ENV['MONGOHQ_URL'])
       db_name = db.path.gsub(/^\//, '') || "dotgov"
-      @db = Mongo::Connection.new(db.host, db.port).db(db_name)
-      @db.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
+      db = Mongo::Connection.new(db.host, db.port).db(db_name)
+      db.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
+      db
     end
   end
 
