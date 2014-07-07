@@ -29,6 +29,3 @@ Note: You'll need Mongo installed and running.
 ## Running locally
 
 `script/server`
-
-
-`script/setup`
