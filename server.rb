@@ -2,6 +2,7 @@ require 'mongo'
 require 'sinatra'
 require 'sinatra/reloader'
 require "addressable/uri"
+require 'uri'
 
 class DotGovBrowser < Sinatra::Base
   include Mongo
@@ -10,12 +11,17 @@ class DotGovBrowser < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  def client
-    @client ||= MongoClient.new
+  def get_connection
+
   end
 
   def db
-    @db ||= client.db("dotgov")
+    @db ||= begin
+      db = URI.parse(ENV['MONGOHQ_URL'])
+      db_name = db.path.gsub(/^\//, '') || "dotgov"
+      @db = Mongo::Connection.new(db.host, db.port).db(db_name)
+      @db.authenticate(db.user, db.password) unless (db.user.nil? || db.user.nil?)
+    end
   end
 
   def domains
