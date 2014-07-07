@@ -15,9 +15,9 @@ class DotGovBrowser < Sinatra::Base
 
   def initialize
     super
+    domains.drop_indexes
     fields.each do |field|
-      domains.drop_indexes
-      domains.create_index( field )
+      domains.create_index( { field.to_sym => Mongo::HASHED }, :background => true )
     end
   end
 
