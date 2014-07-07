@@ -1,0 +1,69 @@
+#! /usr/bin/env ruby
+
+require 'csv'
+require 'open-uri'
+require 'fileutils'
+require "site-inspector"
+
+url = "https://explore.data.gov/api/views/ku4m-7ynp/rows.csv?accessType=DOWNLOAD"
+data = open(url).read
+
+data_file = File.expand_path "./data/domains.csv"
+
+blank_domain = SiteInspector.new("foo.gov").as_json
+blank_domain.each { |k,v| blank_domain[k] = nil }
+blank_domain.merge!({
+  :agency => nil,
+  :last_checked => nil
+})
+
+if !File.exists? data_file
+  CSV.open(data_file, "w") do |csv|
+    csv << blank_domain.keys
+  end
+end
+
+cache = CSV.read(data_file, headers: true)
+
+CSV.new(data, headers: true).each_with_index do |row, index|
+  puts "Processing #{row["Domain Name"]}..."
+  next unless row["Domain Name"]
+  next if cache.any? { |cached_domain| cached_domain["domain"] == row["Domain Name"].downcase }
+  begin
+    site = SiteInspector.new(row["Domain Name"])
+    if site.redirect?
+      domain = blank_domain.merge({
+        :domain => site.domain.to_s,
+        :uri => site.uri.to_s,
+        :government => site.government?,
+        :live => !!site.response,
+        :ssl => site.https?,
+        :enforce_https => site.enforce_https?,
+        :non_www => site.non_www?,
+        :redirect => site.redirect,
+        :ip => site.ip,
+        :hostname => site.hostname.to_s,
+      })
+    else
+      domain = site.as_json
+      [:cms, :analytics, :javascript, :advertising].each do |field|
+        domain[field] = domain[field].keys.join(", ")
+      end
+    end
+  rescue Exception => msg
+    puts "#{row["Domain Name"]} errored out: #{msg} :("
+    domain = blank_domain.merge({
+      :domain => row["Domain Name"].to_s.downcase,
+      :uri => nil,
+      :government => nil,
+      :live => false
+    })
+  end
+  domain[:agency] = row["Federal Agency "]
+  domain[:last_checked] = Time.now
+  CSV.open(data_file, "a+") do |csv|
+    csv << domain.values
+  end
+end
+
+`mongoimport -d dotgov -c domains --type csv --file #{data_file} --headerline`

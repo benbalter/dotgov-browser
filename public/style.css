@@ -1,0 +1,4 @@
+.domains { width: 79%; overflow-y: scroll; float: left; }
+.sidebar { width: 20%; margin-left: 1%; float: left; }
+.true { color: green; }
+.false { color: red; }

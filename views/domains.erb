@@ -1,0 +1,25 @@
+<div class="domains">
+  <table class="table table-striped">
+    <tr>
+      <% fields.each do |field| %>
+      <th><%= field %></th>
+      <% end %>
+    </tr>
+    <% domains.each do |domain| %>
+    <tr>
+      <% domain.each do |key,value| %>
+        <% if key[0] == "_" %>
+        <% elsif key == "domain" %>
+        <td><a href="/domains/<%= value %>"><%= value %></a></td>
+        <% else %>
+        <td class="<%= value %>"><%= value %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="sidebar">
+  <%= erb :sidebar %>
+</div>

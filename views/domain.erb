@@ -1,0 +1,22 @@
+<h2><%= domain["domain"] %></h2>
+
+<table>
+  <% domain.each do |key,value| %>
+    <% next if key[0] == "_" %>
+    <tr>
+      <th><%= key %></th>
+      <td class="<%= value %>"><%= value %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <% if redirects.has_next? %>
+      <th>Redirects from</th>
+      <td>
+        <ul>
+          <% redirects.each do |redirect| %>
+            <li><a href="/domains/<%= redirect["domain"] %>"><%= redirect["domain"] %></li>
+          <% end %>
+        </ul>
+      </td>
+    <% end %>
+</table>
