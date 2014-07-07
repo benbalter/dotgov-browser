@@ -28,7 +28,9 @@ cache = CSV.read(data_file, headers: true)
 CSV.new(data, headers: true).each_with_index do |row, index|
   puts "Processing #{row["Domain Name"]}..."
   next unless row["Domain Name"]
-  next if cache.any? { |cached_domain| cached_domain["domain"] == row["Domain Name"].downcase }
+  next if cache.any? do |cached_domain|
+    cached_domain["domain"] =~ /(www\.)?#{Regexp.escape(row["Domain Name"]).downcase}/
+  end
   begin
     site = SiteInspector.new(row["Domain Name"])
     if site.redirect?
@@ -65,5 +67,7 @@ CSV.new(data, headers: true).each_with_index do |row, index|
     csv << domain.values
   end
 end
+
+echo "done."
 
 `mongoimport -d dotgov -c domains --type csv --file #{data_file} --headerline --drop`
