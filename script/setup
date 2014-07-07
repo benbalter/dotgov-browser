@@ -68,6 +68,6 @@ CSV.new(data, headers: true).each_with_index do |row, index|
   end
 end
 
-echo "done."
+puts "done."
 
 `mongoimport -d dotgov -c domains --type csv --file #{data_file} --headerline --drop`
