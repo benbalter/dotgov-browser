@@ -4,9 +4,9 @@ require 'csv'
 data_file = File.expand_path "./data/domains.csv"
 data = CSV.read(data_file, headers: true)
 
-puts data.count
+start = data.count
 data = data.reject { |row| row["live"] == "false" }
-puts data.count
+puts = "Removed #{start - data.count} domains"
 
 CSV.open(data_file, "wb") do |csv|
   csv << data.first.to_h.keys
