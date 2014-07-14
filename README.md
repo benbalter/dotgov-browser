@@ -8,7 +8,7 @@ Probably not. This data is to be treated as preliminary and is provided “as is
 
 ## Where does this information come from?
 
-An open source tool called [Site Inspector](github.com/benbalter/site-inspector-ruby)
+An open source tool called [Site Inspector](http://github.com/benbalter/site-inspector-ruby)
 
 ## I found a mistake
 
