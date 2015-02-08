@@ -14,6 +14,7 @@ gem "site-inspector", :github => "benbalter/site-inspector-ruby"
 gem 'friendly_id', '~> 5.1.0'
 gem "will_paginate"
 gem 'rails_12factor', group: :production
+gem 'puma'
 
 # Cruft
 
@@ -30,6 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 
 group :development, :test do
+  gem "foreman"
   gem 'byebug'
   gem 'web-console', '~> 2.0'
 end
