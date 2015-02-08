@@ -15,6 +15,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem "will_paginate"
 gem 'rails_12factor', group: :production
 gem 'puma'
+gem "rack-cache"
 
 # Cruft
 
