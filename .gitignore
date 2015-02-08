@@ -1,20 +1,11 @@
-cache
-debug.log
-.Gemfile
+# Ignore bundler config.
 /.bundle
-/.ruby-version
-/Gemfile.lock
-pkg
-/dist
-/doc/rdoc
-/*/doc
-/*/test/tmp
-/activerecord/sqlnet.log
-/activemodel/test/fixtures/fixture_database.sqlite3
-/activesupport/test/fixtures/isolation_test
-/railties/test/500.html
-/railties/test/fixtures/tmp
-/railties/test/initializer/root/log
-/railties/doc
-/railties/tmp
-/guides/output
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
