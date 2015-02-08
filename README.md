@@ -18,13 +18,12 @@ Is it an issue with the underlying data? [Open an issue on Site Inspector](https
 
 ## Bootstrapping locally
 
-`script/bootstrap`
+1. `script/bootstrap` - bootstrap the ruby environment
+2. `scrupt/setup` - setup the database and seed domains
 
-Note: You'll need Mongo installed and running.
+## Crawling
 
-## Crawling and seeding the data
-
-`script/setup`
+`script/crawl`
 
 ## Running locally
 
