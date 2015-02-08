@@ -1,8 +1,4 @@
-require "./server"
-require 'rack/cache'
+# This file is used by Rack-based servers to start the application.
 
-use Rack::Cache,
-  :metastore   => "file:cache/meta",
-  :entitystore => "file:cache/body"
-
-run DotGovBrowser
+require ::File.expand_path('../config/environment', __FILE__)
+run Rails.application

@@ -1,0 +1,126 @@
+<h2 class="lead">
+  <%= @domain.host %><br />
+<small><%= @domain.agency.name %></small>
+</h2>
+
+<h3>Basics</h3>
+<table>
+  <tr>
+    <th>Government</th>
+    <td><%= @domain.government? %></td>
+  </tr>
+  <tr>
+    <th>Live</th>
+    <td><%= @domain.live? %></td>
+  </tr>
+  <tr>
+    <th>SSL (HTTPS)</th>
+    <td><%= @domain.ssl? %></td>
+  </tr>
+  <tr>
+    <th>SSL Enforced</th>
+    <td><%= @domain.enforce_https? %></td>
+  </tr>
+  <tr>
+    <th>Non-www support</th>
+    <td><%= @domain.non_www? %></td>
+  </tr>
+</table>
+
+<h3>Network</h3>
+<table>
+  <tr>
+    <th>IP</th>
+    <td><%= @domain.ip %></td>
+  </tr>
+  <tr>
+    <th>Hostname</th>
+    <td><%= @domain.hostname %></td>
+  </tr>
+  <tr>
+    <th>IPV6</th>
+    <td><%= @domain.ipv6? %></td>
+  </tr>
+  <tr>
+    <th>DNSSEC</th>
+    <td><%= @domain.dnssec? %></td>
+  </tr>
+  <tr>
+    <th>CDN</th>
+    <td>:soon:</td>
+  </tr>
+  <tr>
+    <th>Google Apps</th>
+    <td><%= @domain.google_apps? %></td>
+  </tr>
+  <tr>
+    <th>Cloud Provider</th>
+    <td>:soon:</td>
+  </tr>
+</table>
+
+<h3>Technology</h3>
+<table>
+  <tr>
+    <th>Server</th>
+    <td><%= @domain.server %></td>
+  </tr>
+  <tr>
+    <th>CMS</th>
+    <td>:soon:</td>
+  </tr>
+  <tr>
+    <th>Analytics</th>
+    <td>:soon:</td>
+  </tr>
+  <tr>
+    <th>Javascript</th>
+    <td>:soon:</td>
+  </tr>
+  <tr>
+    <th>Advertising</th>
+    <td>:soon:</td>
+  </tr>
+</table>
+
+<h3>Compliance</h3>
+<table>
+  <tr>
+    <th><code>/data</code></th>
+    <td><%= @domain.slash_data? %></td>
+  </tr>
+  <tr>
+    <th><code>/developer</code></th>
+    <td><%= @domain.slash_developer? %></td>
+  </tr>
+  <tr>
+    <th><code>/data.json</code></th>
+    <td><%= @domain.data_dot_json? %></td>
+  </tr>
+</table>
+
+<h3>Security Headers</h3>
+<table>
+  <tr>
+    <th>XSS Protection</th>
+    <td><%= @domain.xss_protection? %></td>
+  </tr>
+  <tr>
+    <th>Strict Transport Security</th>
+    <td><%= @domain.strict_transport_securit? %></td>
+  </tr>
+  <tr>
+    <th>Content security policy</th>
+    <td><%= @domain.content_security_policy? %></td>
+  </tr>
+  <tr>
+    <th>Clickjack protection</th>
+    <td><%= @domain.click_jacking_protection? %></td>
+  </tr>
+  <tr>
+    <th>Secure Cookies</th>
+    <td><%= @domain.secure_cookies? %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back', domains_path %>

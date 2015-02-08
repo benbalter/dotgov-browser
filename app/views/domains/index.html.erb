@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Domains</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Host</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @domains.each do |domain| %>
+      <tr>
+        <td><%= domain.host %></td>
+        <td><%= link_to 'Show', domain %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

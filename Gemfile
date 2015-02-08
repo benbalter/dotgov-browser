@@ -1,9 +1,33 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "mongo"
-gem 'sinatra'
-gem 'sinatra-contrib'
-gem 'bson_ext'
-gem 'addressable'
-gem 'site-inspector', :git => "https://github.com/benbalter/site-inspector-ruby"
-gem 'rack-cache'
+# Rails
+gem 'rails', '4.2.0'
+gem 'sqlite3'
+gem 'bootstrap-sass'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
+
+# Custom Gems
+gem "gman"
+gem "site-inspector", :path => "/Users/benbalter/projects/site-inspector-ruby"
+gem 'friendly_id', '~> 5.1.0'
+
+# Cruft
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+gem 'sdoc', '~> 0.4.0', group: :doc
+
+# Use Unicorn as the app server
+# gem 'unicorn'
+
+group :development, :test do
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+end
