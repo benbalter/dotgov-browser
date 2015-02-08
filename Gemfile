@@ -12,6 +12,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "gman"
 gem "site-inspector", :path => "/Users/benbalter/projects/site-inspector-ruby"
 gem 'friendly_id', '~> 5.1.0'
+gem "will_paginate"
 
 # Cruft
 

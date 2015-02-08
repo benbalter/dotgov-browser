@@ -1,0 +1,24 @@
+<p><%= page_entries_info domains %></p>
+<p><%= link_to "Reset query", domains_path %></p>
+
+<table>
+  <tr>
+    <th>Domain</th>
+    <th>Agency</th>
+    <% Domain::BOOLEANS.each do |field| %>
+      <th><%= field.to_s.humanize %></th>
+    <% end %>
+  </tr>
+  <% domains.each do |domain| %>
+    <tr>
+      <td><%= link_to domain.host, domain %></td>
+      <td><%= link_to domain.agency.name, domain.agency %></td>
+      <% Domain::BOOLEANS.each do |field| %>
+        <% value = domain.send(field) %>
+        <td><%= link_to value.to_s, params.merge({field => value}) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<div><%= will_paginate domains %></div>

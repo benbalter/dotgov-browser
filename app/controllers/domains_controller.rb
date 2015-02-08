@@ -4,7 +4,12 @@ class DomainsController < ApplicationController
   # GET /domains
   # GET /domains.json
   def index
-    @domains = Domain.all
+    query = {}
+    Domain::BOOLEANS.each do |field|
+      next unless params[field]
+      query[field] = !!(params[field] == "true")
+    end
+    @domains = Domain.where(query).page(params[:page])
   end
 
   # GET /domains/1
