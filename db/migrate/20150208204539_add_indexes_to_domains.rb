@@ -20,6 +20,6 @@ class AddIndexesToDomains < ActiveRecord::Migration
     add_index :domains, :content_security_policy
     add_index :domains, :xss_protection
     add_index :domains, :secure_cookies
-    add_index :domains, :strict_transport_securit
+    add_index :domains, :strict_transport_security
   end
 end

@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150208204539) do
   add_index "domains", ["slash_developer"], name: "index_domains_on_slash_developer"
   add_index "domains", ["slug"], name: "index_domains_on_slug", unique: true
   add_index "domains", ["ssl"], name: "index_domains_on_ssl"
-  add_index "domains", ["strict_transport_securit"], name: "index_domains_on_strict_transport_securit"
+  add_index "domains", ["strict_transport_security"], name: "index_domains_on_strict_transport_security"
   add_index "domains", ["uri"], name: "index_domains_on_uri"
   add_index "domains", ["xss_protection"], name: "index_domains_on_xss_protection"
 
