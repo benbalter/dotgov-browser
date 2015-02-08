@@ -21,4 +21,12 @@ class Domain < ActiveRecord::Base
   def validate_government_domain
     errors.add(:host, "is not a governemnt domain") unless Gman.valid?(self.host)
   end
+
+  def crawl!
+    inspector = SiteInspector.new(self.host)
+    inspector.to_hash.each do |field, value|
+      self.send("#{field}=", value) if self.respond_to?("#{field}=")
+    end
+    self.save!
+  end
 end
