@@ -9,7 +9,7 @@ class DomainsController < ApplicationController
       next unless params[field]
       query[field] = !!(params[field] == "true")
     end
-    @domains = Domain.where(query).page(params[:page])
+    @domains = Domain.where(query).order("host asc").page(params[:page])
   end
 
   # GET /domains/1
