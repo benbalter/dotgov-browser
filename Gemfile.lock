@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/benbalter/site-inspector-ruby.git
-  revision: 92a93dc3f5548b245ff360b0d0d79a1921ebaeeb
+  revision: 9701975b2a67a32b467a36db88b6bf1920205ca0
   specs:
     site-inspector (1.0.1)
       dnsruby (~> 1.56)
