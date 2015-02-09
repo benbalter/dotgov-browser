@@ -1,5 +1,7 @@
 class Domain < ActiveRecord::Base
   belongs_to :agency
+  belongs_to :content_delivery_network
+  belongs_to :content_management_system
 
   before_validation :normalize_host
   validate :validate_government_domain
@@ -13,6 +15,25 @@ class Domain < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :host, use: [:slugged, :finders]
+
+  def cdn
+    content_delivery_network.name if content_delivery_network
+  end
+
+  def cdn=(name)
+    self.content_delivery_network = ContentDeliveryNetwork.find_or_create_by :name => name
+    self.save!
+  end
+
+  def cms
+    content_management_system.name if content_management_system
+  end
+
+  def cms=(name)
+    name = name.keys.first.to_s if name.class == Hash
+    self.content_management_system = ContentManagementSystem.find_or_create_by :name => name
+    self.save!
+  end
 
   def normalize_host
     self.host = host.downcase if host
