@@ -12,7 +12,7 @@
   <% domains.each do |domain| %>
     <tr>
       <td><%= link_to domain.host, domain %></td>
-      <td><%= link_to domain.agency.name, domain.agency %></td>
+      <td><%= link_to domain.agency.name, params.merge({ :agency => domain.agency.slug }) %></td>
       <% Domain::BOOLEANS.each do |field| %>
         <% value = domain.send(field) %>
         <td><%= link_to value.to_s, params.merge({field => value}) %></td>

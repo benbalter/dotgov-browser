@@ -5,6 +5,12 @@ class DomainsController < ApplicationController
   # GET /domains.json
   def index
     query = {}
+
+    if params[:agency]
+      agency = Agency.find_by :slug => params[:agency]
+      query[:agency] = agency
+    end
+
     Domain::BOOLEANS.each do |field|
       next unless params[field]
       query[field] = !!(params[field] == "true")
