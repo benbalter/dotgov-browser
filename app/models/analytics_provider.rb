@@ -1,6 +1,8 @@
 class AnalyticsProvider < ActiveRecord::Base
   has_and_belongs_to_many :domains
 
+  SHORT_NAME = :analytics
+
   def self.names
     Sniffles::Sniffers.list_all(:analytics).map { |n| n.to_s }
   end

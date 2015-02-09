@@ -1,6 +1,8 @@
 class ContentManagementSystem < ActiveRecord::Base
   has_many :domains
 
+  SHORT_NAME = :cms
+
   def self.names
     Sniffles::Sniffers.list_all(:cms).map { |n| n.to_s }
   end

@@ -6,6 +6,11 @@ class DomainsController < ApplicationController
   def index
     @query = {}
 
+    [ContentDeliveryNetwork, ContentManagementSystem, JavascriptLibrary].each do |klass|
+      sym = klass::SHORT_NAME
+      @query[klass.model_name.singular.to_sym] = klass.find_by(:name => params[sym]) if params[sym]
+    end
+
     if params[:agency]
       agency = Agency.find_by :slug => params[:agency]
       @query[:agency] = agency
