@@ -77,5 +77,7 @@ class Domain < ActiveRecord::Base
       self.send("#{field}=", value) if self.respond_to?("#{field}=")
     end
     self.save!
+  rescue
+    nil
   end
 end
