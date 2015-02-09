@@ -4,18 +4,18 @@ class DomainsController < ApplicationController
   # GET /domains
   # GET /domains.json
   def index
-    query = {}
+    @query = {}
 
     if params[:agency]
       agency = Agency.find_by :slug => params[:agency]
-      query[:agency] = agency
+      @query[:agency] = agency
     end
 
     Domain::BOOLEANS.each do |field|
       next unless params[field]
-      query[field] = !!(params[field] == "true")
+      @query[field] = !!(params[field] == "true")
     end
-    @domains = Domain.where(query).order("host asc").page(params[:page])
+    @domains = Domain.where(@query).order("host asc").page(params[:page])
   end
 
   # GET /domains/1
