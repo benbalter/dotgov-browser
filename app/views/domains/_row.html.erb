@@ -1,0 +1,4 @@
+<tr>
+  <th><%= label || field.to_s.humanize %></th>
+  <td><%= link_to @domain.send(field).to_s, domains_path({ field => @domain.send(field) }) %></td>
+</tr>

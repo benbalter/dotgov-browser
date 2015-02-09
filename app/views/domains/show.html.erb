@@ -1,58 +1,25 @@
 <h2 class="lead">
   <%= @domain.host %><br />
-<small><%= @domain.agency.name %></small>
+  <small><%= @domain.agency.name %></small>
 </h2>
 
 <h3>Basics</h3>
 <table>
-  <tr>
-    <th>Government</th>
-    <td><%= @domain.government? %></td>
-  </tr>
-  <tr>
-    <th>Live</th>
-    <td><%= @domain.live? %></td>
-  </tr>
-  <tr>
-    <th>SSL (HTTPS)</th>
-    <td><%= @domain.ssl? %></td>
-  </tr>
-  <tr>
-    <th>SSL Enforced</th>
-    <td><%= @domain.enforce_https? %></td>
-  </tr>
-  <tr>
-    <th>Non-www support</th>
-    <td><%= @domain.non_www? %></td>
-  </tr>
+  <%= row_for :government %>
+  <%= row_for :live %>
+  <%= row_for :ssl, "SSL (HTTPS)" %>
+  <%= row_for :enforce_https, "SSL Enforced" %>
+  <%= row_for :non_www, "Non-www support" %>
 </table>
 
 <h3>Network</h3>
 <table>
-  <tr>
-    <th>IP</th>
-    <td><%= @domain.ip %></td>
-  </tr>
-  <tr>
-    <th>Hostname</th>
-    <td><%= @domain.hostname %></td>
-  </tr>
-  <tr>
-    <th>IPV6</th>
-    <td><%= @domain.ipv6? %></td>
-  </tr>
-  <tr>
-    <th>DNSSEC</th>
-    <td><%= @domain.dnssec? %></td>
-  </tr>
-  <tr>
-    <th>CDN</th>
-    <td>:soon:</td>
-  </tr>
-  <tr>
-    <th>Google Apps</th>
-    <td><%= @domain.google_apps? %></td>
-  </tr>
+  <%= row_for :ip, "IP" %>
+  <%= row_for :hostname %>
+  <%= row_for :ipv6, "IPv6" %>
+  <%= row_for :dnssec, "DNSSEC" %>
+  <%= row_for :cdn, "CDN" %>
+  <%= row_for :google_apps %>
   <tr>
     <th>Cloud Provider</th>
     <td>:soon:</td>
@@ -61,22 +28,19 @@
 
 <h3>Technology</h3>
 <table>
-  <tr>
-    <th>Server</th>
-    <td><%= @domain.server %></td>
-  </tr>
-  <tr>
-    <th>CMS</th>
-    <td>:soon:</td>
-  </tr>
+  <%= row_for :server %>
+  <%= row_for :cms, "CMS" %>
   <tr>
     <th>Analytics</th>
-    <td>:soon:</td>
+    <td>
+      <ul>
+        <% @domain.analytics.each do |a| %>
+          <li><%= a %></li>
+        <% end %>
+      </ul>
+    </td>
   </tr>
-  <tr>
-    <th>Javascript</th>
-    <td>:soon:</td>
-  </tr>
+  <%= row_for :javascript %>
   <tr>
     <th>Advertising</th>
     <td>:soon:</td>
@@ -85,42 +49,18 @@
 
 <h3>Compliance</h3>
 <table>
-  <tr>
-    <th><code>/data</code></th>
-    <td><%= @domain.slash_data? %></td>
-  </tr>
-  <tr>
-    <th><code>/developer</code></th>
-    <td><%= @domain.slash_developer? %></td>
-  </tr>
-  <tr>
-    <th><code>/data.json</code></th>
-    <td><%= @domain.data_dot_json? %></td>
-  </tr>
+  <%= row_for :slash_data, "/data" %>
+  <%= row_for :slash_developer, "/developer" %>
+  <%= row_for :data_dot_json, "/data.json" %>
 </table>
 
 <h3>Security Headers</h3>
 <table>
-  <tr>
-    <th>XSS Protection</th>
-    <td><%= @domain.xss_protection? %></td>
-  </tr>
-  <tr>
-    <th>Strict Transport Security</th>
-    <td><%= @domain.strict_transport_security? %></td>
-  </tr>
-  <tr>
-    <th>Content security policy</th>
-    <td><%= @domain.content_security_policy? %></td>
-  </tr>
-  <tr>
-    <th>Clickjack protection</th>
-    <td><%= @domain.click_jacking_protection? %></td>
-  </tr>
-  <tr>
-    <th>Secure Cookies</th>
-    <td><%= @domain.secure_cookies? %></td>
-  </tr>
+  <%= row_for :xss_protection %>
+  <%= row_for :strict_transport_security %>
+  <%= row_for :content_security_policy %>
+  <%= row_for :click_jacking_protection %>
+  <%= row_for :secure_cookies %>
 </table>
 
 <%= link_to 'Back', domains_path %>

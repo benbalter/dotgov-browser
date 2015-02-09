@@ -25,7 +25,7 @@
   <% domains.each do |domain| %>
     <tr>
       <td><%= link_to domain.host, domain %></td>
-      <td><%= link_to domain.agency.name, params.merge({ :agency => domain.agency.slug }) %></td>
+      <td><%= link_to domain.agency.name, params.merge({ :agency => domain.agency.slug }) if domain.agency %></td>
       <% Domain::BOOLEANS.each do |field| %>
         <% next if params.keys.include? field.to_s %>
         <% value = domain.send(field) %>
