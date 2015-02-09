@@ -16,6 +16,10 @@ class DomainsController < ApplicationController
       @query[:agency] = agency
     end
 
+    [:ip, :hostname, :server].each do |field|
+      @query[field] = params[field] if params[field]
+    end
+
     Domain::BOOLEANS.each do |field|
       next unless params[field]
       @query[field] = !!(params[field] == "true")
