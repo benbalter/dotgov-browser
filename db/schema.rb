@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150209014339) do
     t.integer "domain_id"
   end
 
-  add_index "analytics_providers_domains", ["analytics_library_id"], name: "index_analytics_providers_domains_on_analytics_library_id", using: :btree
+  add_index "analytics_providers_domains", ["analytics_provider_id"], name: "index_analytics_providers_domains_on_analytics_provider_id", using: :btree
   add_index "analytics_providers_domains", ["domain_id"], name: "index_analytics_providers_domains_on_domain_id", using: :btree
 
   create_table "content_delivery_networks", force: :cascade do |t|
