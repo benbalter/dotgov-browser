@@ -4,3 +4,6 @@
 
 table td { min-width: 100px; }
 .last-checked { font-style: italic; }
+
+td.false a { color: red; }
+td.true a { color: green; }

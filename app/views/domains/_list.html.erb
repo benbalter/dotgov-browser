@@ -29,7 +29,7 @@
       <% Domain::BOOLEANS.each do |field| %>
         <% next if params.keys.include? field.to_s %>
         <% value = domain.send(field) %>
-        <td><%= link_to value.to_s, params.merge({field => value}) %></td>
+        <td class="<%=h value.to_s %>"><%= link_to value.to_s, params.merge({field => value}) %></td>
       <% end %>
     </tr>
   <% end %>
