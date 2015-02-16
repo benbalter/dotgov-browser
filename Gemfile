@@ -16,7 +16,6 @@ gem "will_paginate"
 gem 'rails_12factor', group: :production
 gem 'puma'
 gem "rack-cache"
-gem "pry"
 
 # Cruft
 
@@ -33,6 +32,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 
 group :development, :test do
+  gem "pry"
+  gem 'vcr'
+  gem 'webmock'
   gem "foreman"
   gem 'byebug'
   gem 'web-console', '~> 2.0'

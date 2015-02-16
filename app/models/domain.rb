@@ -64,7 +64,7 @@ class Domain < ActiveRecord::Base
   end
 
   def normalize_host
-    self.host = host.downcase if host
+    self.host = host.downcase.strip if host
   end
 
   def validate_government_domain
@@ -80,8 +80,6 @@ class Domain < ActiveRecord::Base
       self.send("#{field}=", value) if self.respond_to?("#{field}=")
     end
     self.save!
-  rescue
-    nil
   end
 
   def url
