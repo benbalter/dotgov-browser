@@ -85,4 +85,8 @@ class Domain < ActiveRecord::Base
   def url
     "http#{"s" if ssl?}://#{host}"
   end
+
+  def to_hash
+    inspector.to_hash
+  end
 end
