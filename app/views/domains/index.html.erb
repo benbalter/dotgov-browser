@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= link_to "Domains", domains_path %></h1>
-
 <%= render(
   partial: 'domains/list',
   locals: { domains: @domains, query: @query }
