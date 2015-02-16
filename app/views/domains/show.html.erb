@@ -3,64 +3,82 @@
   <small><%= @domain.agency.name %></small>
 </h2>
 
-<h3>Basics</h3>
-<table>
-  <%= row_for :government %>
-  <%= row_for :live %>
-  <%= row_for :ssl, "SSL (HTTPS)" %>
-  <%= row_for :enforce_https, "SSL Enforced" %>
-  <%= row_for :non_www, "Non-www support" %>
-</table>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Basics</h3>
+    <table class="table">
+      <%= row_for :government %>
+      <%= row_for :live %>
+      <%= row_for :ssl, "SSL (HTTPS)" %>
+      <%= row_for :enforce_https, "SSL Enforced" %>
+      <%= row_for :non_www, "Non-www support" %>
+    </table>
+  </div>
 
-<h3>Network</h3>
-<table>
-  <%= row_for :ip, "IP" %>
-  <%= row_for :hostname %>
-  <%= row_for :ipv6, "IPv6" %>
-  <%= row_for :dnssec, "DNSSEC" %>
-  <%= row_for :cdn, "CDN" %>
-  <%= row_for :google_apps %>
-  <tr>
-    <th>Cloud Provider</th>
-    <td>:soon:</td>
-  </tr>
-</table>
+  <div class="col-md-4">
+    <h3>Network</h3>
+    <table class="table">
+      <%= row_for :ip, "IP" %>
+      <%= row_for :hostname %>
+      <%= row_for :ipv6, "IPv6" %>
+      <%= row_for :dnssec, "DNSSEC" %>
+      <%= row_for :cdn, "CDN" %>
+      <%= row_for :google_apps %>
+      <tr>
+        <th>Cloud Provider</th>
+        <td>:soon:</td>
+      </tr>
+    </table>
+  </div>
 
-<h3>Technology</h3>
-<table>
-  <%= row_for :server %>
-  <%= row_for :cms, "CMS" %>
-  <tr>
-    <th>Analytics</th>
-    <td>
-      <ul>
-        <% @domain.analytics.each do |a| %>
-          <li><%= a %></li>
-        <% end %>
-      </ul>
-    </td>
-  </tr>
-  <%= row_for :javascript %>
-  <tr>
-    <th>Advertising</th>
-    <td>:soon:</td>
-  </tr>
-</table>
+  <div class="col-md-4">
+    <h3>Technology</h3>
+    <table class="table">
+      <%= row_for :server %>
+      <%= row_for :cms, "CMS" %>
+      <tr>
+        <th>Analytics</th>
+        <td>
+          <ul>
+            <% @domain.analytics.each do |a| %>
+              <li><%= a %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      <%= row_for :javascript %>
+      <tr>
+        <th>Advertising</th>
+        <td>:soon:</td>
+      </tr>
+    </table>
+  </div>
+</div>
 
-<h3>Compliance</h3>
-<table>
-  <%= row_for :slash_data, "/data" %>
-  <%= row_for :slash_developer, "/developer" %>
-  <%= row_for :data_dot_json, "/data.json" %>
-</table>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Compliance</h3>
+    <table class="table">
+      <%= row_for :slash_data, "/data" %>
+      <%= row_for :slash_developer, "/developer" %>
+      <%= row_for :data_dot_json, "/data.json" %>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <h3>Security Headers</h3>
+    <table class="table">
+      <%= row_for :xss_protection %>
+      <%= row_for :strict_transport_security %>
+      <%= row_for :content_security_policy %>
+      <%= row_for :click_jacking_protection %>
+      <%= row_for :secure_cookies %>
+    </table>
+  </div>
 
-<h3>Security Headers</h3>
-<table>
-  <%= row_for :xss_protection %>
-  <%= row_for :strict_transport_security %>
-  <%= row_for :content_security_policy %>
-  <%= row_for :click_jacking_protection %>
-  <%= row_for :secure_cookies %>
-</table>
+  <div class="col-md-4">
+    <h3>Meta</h3>
+    <p>Link: <a href="<%= @domain.url %>"><%= @domain.host %></a></p>
+    <p class="last-checked">Last checked <%= time_ago_in_words(@domain.updated_at) %> ago</p>
+  </div>
 
-<%= link_to 'Back', domains_path %>
+</div>

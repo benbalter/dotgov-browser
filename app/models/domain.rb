@@ -83,4 +83,8 @@ class Domain < ActiveRecord::Base
   rescue
     nil
   end
+
+  def url
+    "http#{"s" if ssl?}://#{host}"
+  end
 end
