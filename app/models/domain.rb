@@ -58,7 +58,7 @@ class Domain < ActiveRecord::Base
     names = names.keys.map { |k| k.to_s }
     analytics_providers = []
     names.each do |name|
-      self.analytics_providers.push AnalyticsProvider.new :name => name
+      self.analytics_providers.push AnalyticsProvider.find_or_create_by! :name => name
     end
     self.save!
   end
@@ -84,9 +84,5 @@ class Domain < ActiveRecord::Base
 
   def url
     "http#{"s" if ssl?}://#{host}"
-  end
-
-  def to_hash
-    inspector.to_hash
   end
 end
