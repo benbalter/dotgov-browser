@@ -90,8 +90,10 @@ class Domain < ActiveRecord::Base
   def self.find(id_or_host)
     if id_or_host.is_a? Integer
       Domain.find_by :id => id_or_host
-    else
+    elsif id_or_host.include?(".")
       Domain.find_by :host => id_or_host
+    else
+      Domain.find_by :slug => id_or_host
     end
   end
 end

@@ -103,4 +103,8 @@ class DomainTest < ActiveSupport::TestCase
   test "find by host" do
     assert_equal @domain, Domain.find(@domain.host)
   end
+
+  test "find by slug" do
+    assert_equal @domain, Domain.find(@domain.slug)
+  end
 end

@@ -2,6 +2,8 @@
 
 one:
   host: "911.gov"
+  id: 1
+  slug: "911-gov"
 
 two:
   host: "fcc.gov"
