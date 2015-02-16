@@ -55,10 +55,11 @@ class Domain < ActiveRecord::Base
   end
 
   def analytics=(names)
-    names = names.keys.map { |k| k.to_s }
     analytics_providers = []
-    names.each do |name|
-      self.analytics_providers.push AnalyticsProvider.find_or_create_by! :name => name
+    if names
+      names.keys.map { |k| k.to_s }.each do |name|
+        self.analytics_providers.push AnalyticsProvider.find_or_create_by! :name => name
+      end
     end
     self.save!
   end
