@@ -95,4 +95,12 @@ class DomainTest < ActiveSupport::TestCase
       @domain.analytics = { :foo => {} }
     end
   end
+
+  test "find by id" do
+    assert_equal @domain, Domain.find(@domain.id)
+  end
+
+  test "find by host" do
+    assert_equal @domain, Domain.find(@domain.host)
+  end
 end

@@ -85,4 +85,12 @@ class Domain < ActiveRecord::Base
   def url
     "http#{"s" if ssl?}://#{host}"
   end
+
+  def self.find(id_or_host)
+    if id_or_host.is_a? Integer
+      Domain.find_by :id => id_or_host
+    else
+      Domain.find_by :host => id_or_host
+    end
+  end
 end
