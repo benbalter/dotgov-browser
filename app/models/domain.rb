@@ -23,7 +23,8 @@ class Domain < ActiveRecord::Base
   end
 
   def cdn=(name)
-    self.content_delivery_network = ContentDeliveryNetwork.find_or_create_by :name => name
+    return unless name
+    self.content_delivery_network = ContentDeliveryNetwork.find_or_create_by! :name => name
     self.save!
   end
 
@@ -33,7 +34,8 @@ class Domain < ActiveRecord::Base
 
   def cms=(name)
     name = name.keys.first.to_s if name.class == Hash
-    self.content_management_system = ContentManagementSystem.find_or_create_by :name => name
+    return if name.to_s.blank?
+    self.content_management_system = ContentManagementSystem.find_or_create_by! :name => name
     self.save!
   end
 
@@ -43,7 +45,8 @@ class Domain < ActiveRecord::Base
 
   def javascript=(name)
     name = name.keys.first.to_s if name.class == Hash
-    self.javascript_library = JavascriptLibrary.find_or_create_by :name => name
+    return if name.to_s.blank?
+    self.javascript_library = JavascriptLibrary.find_or_create_by! :name => name
     self.save!
   end
 
