@@ -6,5 +6,9 @@ class ContentDeliveryNetwork < ActiveRecord::Base
     @names ||= SiteInspector::Endpoint::Dns.new(nil).send(:load_data, :cdn).keys
   end
 
+  def to_s
+    name
+  end
+  
   validates :name, inclusion: { in: ContentDeliveryNetwork.names }, uniqueness: true, presence: true
 end

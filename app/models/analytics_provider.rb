@@ -8,5 +8,9 @@ class AnalyticsProvider < ActiveRecord::Base
     Sniffles::Sniffers.list_all(:analytics).map { |n| n.to_s }
   end
 
+  def to_s
+    name
+  end
+  
   validates :name, inclusion: { in: AnalyticsProvider.names }, uniqueness: true, presence: true
 end
