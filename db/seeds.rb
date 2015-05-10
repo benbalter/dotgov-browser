@@ -2,7 +2,7 @@ require 'csv'
 require 'open-uri'
 require 'site-inspector'
 
-csv = "https://raw.githubusercontent.com/GSA/data/gh-pages/dotgov-domains/2014-12-01-federal.csv"
+csv = "https://raw.githubusercontent.com/GSA/data/gh-pages/dotgov-domains/2015-03-15-federal.csv"
 data = open(csv).read
 domains = CSV.parse(data, :headers => true)
 

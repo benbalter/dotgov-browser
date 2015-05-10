@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209014339) do
+ActiveRecord::Schema.define(version: 20150510193755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,6 @@ ActiveRecord::Schema.define(version: 20150209014339) do
     t.string   "slug"
     t.string   "uri"
     t.boolean  "government"
-    t.boolean  "live"
-    t.boolean  "ssl"
-    t.boolean  "enforce_https"
-    t.boolean  "non_www"
-    t.string   "redirect"
     t.string   "ip"
     t.string   "hostname"
     t.boolean  "ipv6"
@@ -81,33 +76,61 @@ ActiveRecord::Schema.define(version: 20150209014339) do
     t.integer  "content_delivery_network_id"
     t.integer  "content_management_system_id"
     t.integer  "javascript_library_id"
+    t.boolean  "up"
+    t.boolean  "www"
+    t.boolean  "root"
+    t.boolean  "https"
+    t.boolean  "enforces_https"
+    t.boolean  "canonically_www"
+    t.boolean  "canonically_https"
+    t.boolean  "hsts"
+    t.boolean  "hsts_subdomains"
+    t.boolean  "hsts_preload_ready"
+    t.string   "scheme"
+    t.boolean  "external_redirect"
+    t.string   "doctype"
+    t.boolean  "sitemap_xml"
+    t.boolean  "robots_txt"
+    t.boolean  "cookies"
+    t.boolean  "redirect"
   end
 
   add_index "domains", ["agency_id"], name: "index_domains_on_agency_id", using: :btree
+  add_index "domains", ["canonically_https"], name: "index_domains_on_canonically_https", using: :btree
+  add_index "domains", ["canonically_www"], name: "index_domains_on_canonically_www", using: :btree
   add_index "domains", ["click_jacking_protection"], name: "index_domains_on_click_jacking_protection", using: :btree
   add_index "domains", ["content_delivery_network_id"], name: "index_domains_on_content_delivery_network_id", using: :btree
   add_index "domains", ["content_management_system_id"], name: "index_domains_on_content_management_system_id", using: :btree
   add_index "domains", ["content_security_policy"], name: "index_domains_on_content_security_policy", using: :btree
+  add_index "domains", ["cookies"], name: "index_domains_on_cookies", using: :btree
   add_index "domains", ["data_dot_json"], name: "index_domains_on_data_dot_json", using: :btree
   add_index "domains", ["dnssec"], name: "index_domains_on_dnssec", using: :btree
-  add_index "domains", ["enforce_https"], name: "index_domains_on_enforce_https", using: :btree
+  add_index "domains", ["doctype"], name: "index_domains_on_doctype", using: :btree
+  add_index "domains", ["enforces_https"], name: "index_domains_on_enforces_https", using: :btree
+  add_index "domains", ["external_redirect"], name: "index_domains_on_external_redirect", using: :btree
   add_index "domains", ["google_apps"], name: "index_domains_on_google_apps", using: :btree
   add_index "domains", ["government"], name: "index_domains_on_government", using: :btree
   add_index "domains", ["hostname"], name: "index_domains_on_hostname", using: :btree
+  add_index "domains", ["hsts"], name: "index_domains_on_hsts", using: :btree
+  add_index "domains", ["hsts_preload_ready"], name: "index_domains_on_hsts_preload_ready", using: :btree
+  add_index "domains", ["hsts_subdomains"], name: "index_domains_on_hsts_subdomains", using: :btree
+  add_index "domains", ["https"], name: "index_domains_on_https", using: :btree
   add_index "domains", ["ip"], name: "index_domains_on_ip", using: :btree
   add_index "domains", ["ipv6"], name: "index_domains_on_ipv6", using: :btree
   add_index "domains", ["javascript_library_id"], name: "index_domains_on_javascript_library_id", using: :btree
-  add_index "domains", ["live"], name: "index_domains_on_live", using: :btree
-  add_index "domains", ["non_www"], name: "index_domains_on_non_www", using: :btree
-  add_index "domains", ["redirect"], name: "index_domains_on_redirect", using: :btree
+  add_index "domains", ["robots_txt"], name: "index_domains_on_robots_txt", using: :btree
+  add_index "domains", ["root"], name: "index_domains_on_root", using: :btree
+  add_index "domains", ["scheme"], name: "index_domains_on_scheme", using: :btree
   add_index "domains", ["secure_cookies"], name: "index_domains_on_secure_cookies", using: :btree
   add_index "domains", ["server"], name: "index_domains_on_server", using: :btree
+  add_index "domains", ["sitemap_xml"], name: "index_domains_on_sitemap_xml", using: :btree
   add_index "domains", ["slash_data"], name: "index_domains_on_slash_data", using: :btree
   add_index "domains", ["slash_developer"], name: "index_domains_on_slash_developer", using: :btree
   add_index "domains", ["slug"], name: "index_domains_on_slug", unique: true, using: :btree
-  add_index "domains", ["ssl"], name: "index_domains_on_ssl", using: :btree
   add_index "domains", ["strict_transport_security"], name: "index_domains_on_strict_transport_security", using: :btree
+  add_index "domains", ["up"], name: "index_domains_on_up", using: :btree
   add_index "domains", ["uri"], name: "index_domains_on_uri", using: :btree
+  add_index "domains", ["www"], name: "index_domains_on_www", using: :btree
   add_index "domains", ["xss_protection"], name: "index_domains_on_xss_protection", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
