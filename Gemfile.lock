@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/benbalter/site-inspector.git
-  revision: dbac718df4f18bd30fe1e9a6d7b16a5f07065195
+  revision: 695532c326bfff89c9939aa81ece4ae2ce320373
   specs:
     site-inspector (2.0.0)
       colorator (~> 0.1)
