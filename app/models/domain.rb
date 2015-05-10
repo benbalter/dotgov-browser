@@ -11,6 +11,58 @@ class Domain < ActiveRecord::Base
 
   BOOLEANS = [:government, :ipv6, :dnssec, :google_apps, :slash_data, :slash_developer, :data_dot_json, :click_jacking_protection, :content_security_policy, :xss_protection, :secure_cookies, :secure_cookies, :up, :www, :root, :https, :enforces_https, :canonically_www, :canonically_https, :hsts, :hsts_subdomains, :hsts_preload_ready, :redirect, :external_redirect, :sitemap_xml, :robots_txt, :cookies]
 
+  FIELDS = {
+    :basics => [
+      :uri,
+      :government,
+      :up,
+      :www,
+      :root,
+      :canonically_www,
+      :canonically_https,
+      :scheme,
+      :external_redirect,
+      :redirect,
+    ],
+
+    :network =>[
+      :hostname,
+      :ipv6,
+      :dnssec,
+      :google_apps,
+    ],
+
+    :technology => [
+      :server,
+      :content_delivery_network_id,
+      :content_management_system_id,
+      :javascript_library_id,
+      :doctype,
+      :sitemap_xml,
+      :robots_txt,
+      :cookies,
+    ],
+
+    :compliance => [
+      :slash_data,
+      :slash_developer,
+      :data_dot_json,
+    ],
+
+    :security => [
+      :https,
+      :enforces_https,
+      :click_jacking_protection,
+      :content_security_policy,
+      :xss_protection,
+      :secure_cookies,
+      :strict_transport_security,
+      :hsts,
+      :hsts_subdomains,
+      :hsts_preload_ready,
+    ]
+  }
+
   BOOLEANS.each do |field|
     validates field, inclusion: { in: [true, false], :message => "must be either true or false" }, :allow_nil => true
   end
@@ -83,7 +135,7 @@ class Domain < ActiveRecord::Base
   end
 
   def url
-    "http#{"s" if ssl?}://#{host}"
+    "http#{"s" if https?}://#{host}"
   end
 
   def self.find(id_or_host)

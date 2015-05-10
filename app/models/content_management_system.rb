@@ -4,6 +4,7 @@ class ContentManagementSystem < ActiveRecord::Base
   SHORT_NAME = :cms
 
   def self.names
+    require 'sniffles'
     Sniffles::Sniffers.list_all(:cms).map { |n| n.to_s }
   end
 
