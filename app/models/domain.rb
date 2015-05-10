@@ -153,7 +153,9 @@ class Domain < ActiveRecord::Base
 
   def hash_to_properties(hash)
     hash.each do |key, value|
-      if value.is_a?(Hash)
+      if [:cms, :analytics, :javascript, :advertising].include?(key)
+        safe_set(key,value)
+      elsif value.is_a?(Hash)
         hash_to_properties(value)
       else
         safe_set(key,value)
