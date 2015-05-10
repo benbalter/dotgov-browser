@@ -5,7 +5,7 @@
     <p>Filter:</p>
     <ul>
       <% query.each do |key,value| %>
-        <li><%= key.to_s.humanize %>: <%= value.respond_to?("name") ? value.name : value %></li>
+        <li><%= format_key(key) %>: <%= value.to_s %></li>
       <% end %>
     </ul>
   </div>
