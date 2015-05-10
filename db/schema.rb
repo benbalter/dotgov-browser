@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510214542) do
+ActiveRecord::Schema.define(version: 20150510220356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20150510214542) do
     t.boolean  "cookies"
     t.boolean  "redirect"
     t.boolean  "humans_txt"
+    t.boolean  "proper_404s"
   end
 
   add_index "domains", ["agency_id"], name: "index_domains_on_agency_id", using: :btree
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(version: 20150510214542) do
   add_index "domains", ["ip"], name: "index_domains_on_ip", using: :btree
   add_index "domains", ["ipv6"], name: "index_domains_on_ipv6", using: :btree
   add_index "domains", ["javascript_library_id"], name: "index_domains_on_javascript_library_id", using: :btree
+  add_index "domains", ["proper_404s"], name: "index_domains_on_proper_404s", using: :btree
   add_index "domains", ["robots_txt"], name: "index_domains_on_robots_txt", using: :btree
   add_index "domains", ["root"], name: "index_domains_on_root", using: :btree
   add_index "domains", ["scheme"], name: "index_domains_on_scheme", using: :btree

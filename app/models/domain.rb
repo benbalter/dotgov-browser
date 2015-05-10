@@ -39,7 +39,9 @@ class Domain < ActiveRecord::Base
       :doctype,
       :sitemap_xml,
       :robots_txt,
+      :humans_txt,
       :cookies,
+      :proper_404s,
     ],
 
     :compliance => [
