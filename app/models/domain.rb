@@ -27,6 +27,7 @@ class Domain < ActiveRecord::Base
 
     :network =>[
       :hostname,
+      :ip,
       :ipv6,
       :dnssec,
       :google_apps,
