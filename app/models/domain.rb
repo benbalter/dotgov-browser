@@ -9,7 +9,7 @@ class Domain < ActiveRecord::Base
   validate :validate_government_domain
   validates :host, uniqueness: true, presence: true
 
-  BOOLEANS = [:government, :live, :ssl, :enforce_https, :non_www, :ipv6, :dnssec, :google_apps, :slash_data, :slash_developer, :data_dot_json, :click_jacking_protection, :content_security_policy, :xss_protection, :secure_cookies, :secure_cookies]
+  BOOLEANS = [:government, :ipv6, :dnssec, :google_apps, :slash_data, :slash_developer, :data_dot_json, :click_jacking_protection, :content_security_policy, :xss_protection, :secure_cookies, :secure_cookies, :up, :www, :root, :https, :enforces_https, :canonically_www, :canonically_https, :hsts, :hsts_subdomains, :hsts_preload_ready, :redirect, :external_redirect, :sitemap_xml, :robots_txt, :cookies]
 
   BOOLEANS.each do |field|
     validates field, inclusion: { in: [true, false], :message => "must be either true or false" }, :allow_nil => true
@@ -73,13 +73,12 @@ class Domain < ActiveRecord::Base
   end
 
   def inspector
-    @inspector ||= SiteInspector.new(host)
+    @inspector ||= SiteInspector.inspect(host)
   end
 
   def crawl!
-    inspector.to_hash.each do |field, value|
-      self.send("#{field}=", value) if self.respond_to?("#{field}=")
-    end
+    hash = inspector.to_h
+    hash_to_properties(hash)
     self.save!
   end
 
@@ -95,5 +94,21 @@ class Domain < ActiveRecord::Base
     else
       Domain.find_by :slug => id_or_host
     end
+  end
+
+  private
+
+  def hash_to_properties(hash)
+    hash.each do |key, value|
+      if value.is_a?(Hash)
+        hash_to_properties(value)
+      else
+        safe_set(key,value)
+      end
+    end
+  end
+
+  def safe_set(key,value)
+    self.send("#{key}=", value) if self.respond_to?("#{key}=")
   end
 end
