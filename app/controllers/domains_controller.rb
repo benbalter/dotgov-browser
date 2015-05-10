@@ -7,8 +7,9 @@ class DomainsController < ApplicationController
     @query = {}
 
     [ContentDeliveryNetwork, ContentManagementSystem, JavascriptLibrary].each do |klass|
-      sym = klass::SHORT_NAME
-      @query[klass.model_name.singular.to_sym] = klass.find_by(:name => params[sym]) if params[sym]
+      field = klass.model_name.singular
+      next unless params[field]
+      @query[field.to_sym] = klass.find_by(:name =>  params[field])
     end
 
     if params[:agency]

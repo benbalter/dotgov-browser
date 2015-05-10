@@ -34,9 +34,9 @@ class Domain < ActiveRecord::Base
 
     :technology => [
       :server,
-      :content_delivery_network_id,
-      :content_management_system_id,
-      :javascript_library_id,
+      :content_delivery_network,
+      :content_management_system,
+      :javascript_library,
       :doctype,
       :sitemap_xml,
       :robots_txt,
