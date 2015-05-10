@@ -16,7 +16,7 @@ class DomainsController < ApplicationController
       @query[:agency] = agency
     end
 
-    [:ip, :hostname, :server].each do |field|
+    [:ip, :hostname, :server, :doctype].each do |field|
       @query[field] = params[field] if params[field]
     end
 
