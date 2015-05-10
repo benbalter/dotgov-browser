@@ -4,6 +4,7 @@ class AnalyticsProvider < ActiveRecord::Base
   SHORT_NAME = :analytics
 
   def self.names
+    require 'sniffles'
     Sniffles::Sniffers.list_all(:analytics).map { |n| n.to_s }
   end
 
