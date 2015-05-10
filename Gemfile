@@ -10,7 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Custom Gems
 gem "gman"
-gem "site-inspector", :github => "benbalter/site-inspector-ruby"
+gem "site-inspector", :github => "benbalter/site-inspector"
 gem 'friendly_id', '~> 5.1.0'
 gem "will_paginate"
 gem 'rails_12factor', group: :production

@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/benbalter/site-inspector-ruby.git
-  revision: d7572831250a5ef4dfd064f46b041c75af70fb23
+  remote: git://github.com/benbalter/site-inspector.git
+  revision: a5ce0ba988c3900d06400387dd18f4b5b9a44db0
   specs:
     site-inspector (2.0.0)
       colorator (~> 0.1)
@@ -180,7 +180,7 @@ GEM
     slop (3.6.0)
     sniffles (0.2.0)
       nokogiri (~> 1.6.1)
-    sprockets (3.0.3)
+    sprockets (3.1.0)
       rack (~> 1.0)
     sprockets-rails (2.3.0)
       actionpack (>= 3.0)
