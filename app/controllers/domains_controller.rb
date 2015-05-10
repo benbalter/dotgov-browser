@@ -21,7 +21,7 @@ class DomainsController < ApplicationController
       @query[field] = params[field] if params[field]
     end
 
-    Domain::BOOLEANS.each do |field|
+    Domain.booleans.each do |field|
       next unless params[field]
       @query[field] = !!(params[field] == "true")
     end

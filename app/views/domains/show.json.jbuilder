@@ -1,6 +1,6 @@
 json.extract! @domain, :id, :host, :updated_at
 
-Domain::BOOLEANS.each do |field|
+Domain.booleans.each do |field|
   json.set! field, @domain.send(field)
 end
 

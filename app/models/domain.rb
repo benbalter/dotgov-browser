@@ -9,8 +9,6 @@ class Domain < ActiveRecord::Base
   validate :validate_government_domain
   validates :host, uniqueness: true, presence: true
 
-  BOOLEANS = [:government, :ipv6, :dnssec, :google_apps, :slash_data, :slash_developer, :data_dot_json, :click_jacking_protection, :content_security_policy, :xss_protection, :secure_cookies, :secure_cookies, :up, :www, :root, :https, :enforces_https, :canonically_www, :canonically_https, :hsts, :hsts_subdomains, :hsts_preload_ready, :redirect, :external_redirect, :sitemap_xml, :robots_txt, :cookies]
-
   FIELDS = {
     :basics => [
       :uri,
@@ -64,7 +62,11 @@ class Domain < ActiveRecord::Base
     ]
   }
 
-  BOOLEANS.each do |field|
+  def self.booleans
+    @booleans ||= Domain.columns_hash.select { |k,v| v.type == :boolean }.keys.map { |k| k.to_sym }
+  end
+
+  Domain.booleans.each do |field|
     validates field, inclusion: { in: [true, false], :message => "must be either true or false" }, :allow_nil => true
   end
 
