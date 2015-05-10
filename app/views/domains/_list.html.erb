@@ -17,16 +17,16 @@
   <tr>
     <th>Domain</th>
     <th>Agency</th>
-    <% Domain::BOOLEANS.each do |field| %>
+    <% Domain::FIELDS[:basics].each do |field| %>
       <% next if params.keys.include? field.to_s %>
-      <th><%= field.to_s.humanize %></th>
+      <th><%= format_key(field) %></th>
     <% end %>
   </tr>
   <% domains.each do |domain| %>
     <tr>
       <td><%= link_to domain.host, domain %></td>
       <td><%= link_to domain.agency.name, params.merge({ :agency => domain.agency.slug }) if domain.agency %></td>
-      <% Domain::BOOLEANS.each do |field| %>
+      <% Domain::FIELDS[:basics].each do |field| %>
         <% next if params.keys.include? field.to_s %>
         <% value = domain.send(field) %>
         <td class="<%=h value.to_s %>"><%= link_to value.to_s, params.merge({field => value}) %></td>
