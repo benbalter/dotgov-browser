@@ -18,7 +18,7 @@
     <th>Domain</th>
     <th>Agency</th>
     <% Domain::FIELDS[:basics].each do |field| %>
-      <% next if params.keys.include? field.to_s %>
+      <% next if params.keys.include?(field.to_s) || field == :uri %>
       <th><%= format_key(field) %></th>
     <% end %>
   </tr>
@@ -27,7 +27,7 @@
       <td><%= link_to domain.host, domain %></td>
       <td><%= link_to domain.agency.name, params.merge({ :agency => domain.agency.slug }) if domain.agency %></td>
       <% Domain::FIELDS[:basics].each do |field| %>
-        <% next if params.keys.include? field.to_s %>
+        <% next if params.keys.include?(field.to_s) || field == :uri %>
         <% value = domain.send(field) %>
         <td class="<%=h value.to_s %>"><%= link_to value.to_s, params.merge({field => value}) %></td>
       <% end %>
