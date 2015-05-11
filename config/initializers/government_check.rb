@@ -18,7 +18,17 @@ class SiteInspector
         endpoint.content.path_exists?("/data.json")
       end
 
+      def prefetch
+        options = SiteInspector.typhoeus_defaults.merge(followlocation: true)
+        ["/data", "/developer", "/developers", "/data.json"].each do |path|
+          request = Typhoeus::Request.new(URI.join(endpoint.uri, path), options)
+          SiteInspector.hydra.queue(request)
+        end
+        SiteInspector.hydra.run
+      end
+
       def to_h
+        prefetch
         {
           :government      => government?,
           :slash_data      => slash_data?,
