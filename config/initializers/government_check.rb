@@ -19,6 +19,7 @@ class SiteInspector
       end
 
       def prefetch
+        return unless endpoint.up?
         options = SiteInspector.typhoeus_defaults.merge(followlocation: true)
         ["/data", "/developer", "/developers", "/data.json"].each do |path|
           request = Typhoeus::Request.new(URI.join(endpoint.uri, path), options)
