@@ -19,7 +19,7 @@ Is it an issue with the underlying data? [Open an issue on Site Inspector](https
 ## Bootstrapping locally
 
 1. `script/bootstrap` - bootstrap the ruby environment
-2. `scrupt/setup` - setup the database and seed domains
+2. `script/setup` - setup the database and seed domains
 
 ## Crawling
 
