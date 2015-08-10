@@ -166,6 +166,9 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    roboto (0.2.0)
+      actionpack (>= 3.0.0)
+      rails (>= 3.1.0)
     safe_yaml (1.0.4)
     sass (3.4.13)
     sass-rails (5.0.3)
@@ -230,6 +233,7 @@ DEPENDENCIES
   rack-cache
   rails (= 4.2.0)
   rails_12factor
+  roboto
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   site-inspector!
