@@ -17,6 +17,7 @@ gem 'rails_12factor', group: :production
 gem 'puma'
 gem "rack-cache"
 gem 'roboto'
+gem 'meta-tags'
 
 # Cruft
 
