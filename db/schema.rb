@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510220356) do
+ActiveRecord::Schema.define(version: 20150810173758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,21 +31,7 @@ ActiveRecord::Schema.define(version: 20150510220356) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "analytics_providers_domains", id: false, force: :cascade do |t|
-    t.integer "analytics_provider_id"
-    t.integer "domain_id"
-  end
-
-  add_index "analytics_providers_domains", ["analytics_provider_id"], name: "index_analytics_providers_domains_on_analytics_provider_id", using: :btree
-  add_index "analytics_providers_domains", ["domain_id"], name: "index_analytics_providers_domains_on_domain_id", using: :btree
-
   create_table "content_delivery_networks", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "content_management_systems", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +39,8 @@ ActiveRecord::Schema.define(version: 20150510220356) do
 
   create_table "domains", force: :cascade do |t|
     t.string   "host"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "agency_id"
     t.string   "slug"
     t.string   "uri"
@@ -74,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150510220356) do
     t.boolean  "secure_cookies"
     t.boolean  "strict_transport_security"
     t.integer  "content_delivery_network_id"
-    t.integer  "content_management_system_id"
+    t.integer  "framework_id"
     t.integer  "javascript_library_id"
     t.boolean  "up"
     t.boolean  "www"
@@ -95,14 +81,15 @@ ActiveRecord::Schema.define(version: 20150510220356) do
     t.boolean  "redirect"
     t.boolean  "humans_txt"
     t.boolean  "proper_404s"
+    t.integer  "analytics_provider_id"
   end
 
   add_index "domains", ["agency_id"], name: "index_domains_on_agency_id", using: :btree
+  add_index "domains", ["analytics_provider_id"], name: "index_domains_on_analytics_provider_id", using: :btree
   add_index "domains", ["canonically_https"], name: "index_domains_on_canonically_https", using: :btree
   add_index "domains", ["canonically_www"], name: "index_domains_on_canonically_www", using: :btree
   add_index "domains", ["click_jacking_protection"], name: "index_domains_on_click_jacking_protection", using: :btree
   add_index "domains", ["content_delivery_network_id"], name: "index_domains_on_content_delivery_network_id", using: :btree
-  add_index "domains", ["content_management_system_id"], name: "index_domains_on_content_management_system_id", using: :btree
   add_index "domains", ["content_security_policy"], name: "index_domains_on_content_security_policy", using: :btree
   add_index "domains", ["cookies"], name: "index_domains_on_cookies", using: :btree
   add_index "domains", ["data_dot_json"], name: "index_domains_on_data_dot_json", using: :btree
@@ -110,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150510220356) do
   add_index "domains", ["doctype"], name: "index_domains_on_doctype", using: :btree
   add_index "domains", ["enforces_https"], name: "index_domains_on_enforces_https", using: :btree
   add_index "domains", ["external_redirect"], name: "index_domains_on_external_redirect", using: :btree
+  add_index "domains", ["framework_id"], name: "index_domains_on_framework_id", using: :btree
   add_index "domains", ["google_apps"], name: "index_domains_on_google_apps", using: :btree
   add_index "domains", ["government"], name: "index_domains_on_government", using: :btree
   add_index "domains", ["hostname"], name: "index_domains_on_hostname", using: :btree
@@ -136,6 +124,12 @@ ActiveRecord::Schema.define(version: 20150510220356) do
   add_index "domains", ["uri"], name: "index_domains_on_uri", using: :btree
   add_index "domains", ["www"], name: "index_domains_on_www", using: :btree
   add_index "domains", ["xss_protection"], name: "index_domains_on_xss_protection", using: :btree
+
+  create_table "frameworks", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false

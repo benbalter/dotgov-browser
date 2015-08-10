@@ -1,5 +1,5 @@
 class AnalyticsProvider < ActiveRecord::Base
-  has_and_belongs_to_many :domains
+  has_many :domains
 
   SHORT_NAME = :analytics
 
@@ -11,6 +11,6 @@ class AnalyticsProvider < ActiveRecord::Base
   def to_s
     name
   end
-  
+
   validates :name, inclusion: { in: AnalyticsProvider.names }, uniqueness: true, presence: true
 end

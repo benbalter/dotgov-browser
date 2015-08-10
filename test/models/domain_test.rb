@@ -16,13 +16,13 @@ class DomainTest < ActiveSupport::TestCase
   end
 
   test "inits the inspector" do
-    assert_equal SiteInspector, @domain.inspector.class
+    assert_equal SiteInspector::Domain, @domain.inspector.class
   end
 
   test "returns the URL" do
     domain = Domain.new :host => "911.gov"
-    domain.ssl = false
-    domain.non_www = true
+    domain.https = false
+    domain.root = true
     assert_equal "http://911.gov", @domain.url
   end
 
@@ -56,16 +56,16 @@ class DomainTest < ActiveSupport::TestCase
     end
   end
 
-  test "stores the CMS" do
-    @domain.content_management_system = nil
+  test "stores the framework" do
+    @domain.framework = nil
     @domain.save!
-    assert_equal nil, @domain.cms
+    assert_equal nil, @domain.framework
 
-    @domain.cms = "wordpress"
-    assert_equal "wordpress", @domain.cms
+    @domain.framework = Framework.find_or_create_by! :name => "wordpress"
+    assert_equal "wordpress", @domain.framework.name
 
     assert_raise ActiveRecord::RecordInvalid do
-      @domain.cms = "foo"
+      Framework.find_or_create_by! :name => "foo"
     end
   end
 
@@ -84,15 +84,15 @@ class DomainTest < ActiveSupport::TestCase
   end
 
   test "stores the analytics provider" do
-    @domain.analytics_providers = []
+    @domain.analytics_provider = nil
     @domain.save!
-    assert_equal [], @domain.analytics
+    assert_equal nil, @domain.analytics
 
-    @domain.analytics = { :google_analytics => {} }
-    assert_equal ["google_analytics"], @domain.analytics
+    @domain.analytics = :google_analytics
+    assert_equal "google_analytics", @domain.analytics.name
 
     assert_raise ActiveRecord::RecordInvalid do
-      @domain.analytics = { :foo => {} }
+      @domain.analytics = :foo
     end
   end
 

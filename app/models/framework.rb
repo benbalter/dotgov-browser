@@ -1,4 +1,4 @@
-class ContentManagementSystem < ActiveRecord::Base
+class Framework < ActiveRecord::Base
   has_many :domains
 
   SHORT_NAME = :cms
@@ -12,5 +12,5 @@ class ContentManagementSystem < ActiveRecord::Base
     name
   end
 
-  validates :name, inclusion: { in: ContentManagementSystem.names }, uniqueness: true, presence: true
+  validates :name, inclusion: { in: Framework.names }, uniqueness: true, presence: true
 end

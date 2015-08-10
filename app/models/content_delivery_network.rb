@@ -1,4 +1,5 @@
 class ContentDeliveryNetwork < ActiveRecord::Base
+  has_many :domains
 
   SHORT_NAME = :cdn
 
@@ -9,6 +10,6 @@ class ContentDeliveryNetwork < ActiveRecord::Base
   def to_s
     name
   end
-  
+
   validates :name, inclusion: { in: ContentDeliveryNetwork.names }, uniqueness: true, presence: true
 end

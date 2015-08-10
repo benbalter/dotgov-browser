@@ -1,9 +1,9 @@
 class Domain < ActiveRecord::Base
   belongs_to :agency
   belongs_to :content_delivery_network
-  belongs_to :content_management_system
+  belongs_to :framework
   belongs_to :javascript_library
-  has_and_belongs_to_many :analytics_providers
+  belongs_to :analytics_provider
 
   before_validation :normalize_host
   validate :validate_government_domain
@@ -34,7 +34,7 @@ class Domain < ActiveRecord::Base
     :technology => [
       :server,
       :content_delivery_network,
-      :content_management_system,
+      :framework,
       :javascript_library,
       :doctype,
       :sitemap_xml,
@@ -85,17 +85,6 @@ class Domain < ActiveRecord::Base
     self.save!
   end
 
-  def cms
-    content_management_system.name if content_management_system
-  end
-
-  def cms=(name)
-    name = name.keys.first.to_s if name.class == Hash
-    return if name.to_s.blank?
-    self.content_management_system = ContentManagementSystem.find_or_create_by! :name => name
-    self.save!
-  end
-
   def javascript
     javascript_library.name if javascript_library
   end
@@ -108,15 +97,14 @@ class Domain < ActiveRecord::Base
   end
 
   def analytics
-    self.analytics_providers.map { |p| p.name }
+    self.analytics_provider
   end
 
-  def analytics=(names)
-    analytics_providers = []
-    if names
-      names.keys.map { |k| k.to_s }.each do |name|
-        self.analytics_providers.push AnalyticsProvider.find_or_create_by! :name => name
-      end
+  def analytics=(name)
+    if name.to_s.blank?
+      self.analytics_provider = nil
+    else
+      self.analytics_provider = AnalyticsProvider.find_or_create_by! :name => name
     end
     self.save!
   end
@@ -157,9 +145,7 @@ class Domain < ActiveRecord::Base
 
   def hash_to_properties(hash)
     hash.each do |key, value|
-      if [:cms, :analytics, :javascript, :advertising].include?(key)
-        safe_set(key,value)
-      elsif value.is_a?(Hash)
+      if value.is_a?(Hash)
         hash_to_properties(value)
       else
         safe_set(key,value)
@@ -168,6 +154,14 @@ class Domain < ActiveRecord::Base
   end
 
   def safe_set(key,value)
+    if value.to_s.blank?
+      value = nil
+    else
+      begin
+        value = key.to_s.capitalize.constantize.find_or_create_by! :name => value
+      rescue NameError
+      end
+    end
     self.send("#{key}=", value) if self.respond_to?("#{key}=")
   end
 end
